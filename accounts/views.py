@@ -30,7 +30,7 @@ def profile(request,username):
     for repo in repo_info:
         repo_dict[repo['name']] = repo['stargazers_count']
     repo_dict = {k: v for k, v in sorted(repo_dict.items(), key=lambda item: item[1])}
-    uid.profile.repo_info = json.loads(repo_dict)
+    uid.profile.repo_info = json.loads(str(repo_dict))
     uid.save()
     now = timezone.now()
     args = {'username':uid,'time':now}
