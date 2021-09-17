@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- <p>{{ user.profile.followers }} </p> -->
+<p>{{ username.first_name }}</p>
+<p>{{ username.profile.followers }} Followers</p>
+<p>Last Updated : {{time}}</p>
+{% if user.username == username.username %}
+    <p><a href="{% url 'profile' username %}">Update Now</a></p>
+{% endif %}
+{% for key, value in username.profile.repo_info.items %}
+    <p>{{key}} - {{value}} Stars</p>
+{% endfor %}
+{% endblock %}
