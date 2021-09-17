@@ -87,11 +87,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': os.environ['DB_NAME'],
+        'NAME': 'mydatabase',
 
-        'USER': os.environ['DB_USERNAME'],
+        'USER': 'subarno',
 
-        'PASSWORD': os.environ['DB_PASSWORD'],
+        'PASSWORD': 'HeySiri',
 
         'HOST': '',
 
