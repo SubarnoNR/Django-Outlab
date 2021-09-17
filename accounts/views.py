@@ -30,7 +30,7 @@ def profile(request,username):
     for repo in repo_info:
         repo_dict[repo['name']] = repo['stargazers_count']
     repo_dict = {k: v for k, v in sorted(repo_dict.items(), key=lambda item: item[1])}
-    for k,v in repo_dict.items:
+    for k,v in repo_dict.items():
         repo_json.update({k:v})
     uid.profile.repo_info = repo_json
     uid.save()
