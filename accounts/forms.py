@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+import requests
 
 
 class SignUpForm(UserCreationForm):
@@ -13,6 +14,13 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name' ,'password1', 'password2', )
+    
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        user_info = requests.get('https://api.github.com/users/{}'.format(username))
+        if user_info.status_code == 404:
+            raise forms.ValidationError("No such GitHub user exists. Please check username!")
+        return username
     
     def save(self, commit = True):
         user = super(SignUpForm,self).save(commit=False)
