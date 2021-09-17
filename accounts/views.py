@@ -17,8 +17,8 @@ def register(request):
             return redirect('/accounts/login')
     else:
         form = SignUpForm()
-        args = {'form':form}
-        return render(request,'registration/signup.html',args)
+    args = {'form':form}
+    return render(request,'registration/signup.html',args)
 
 def profile(request,username):
     uid = User.objects.get(username = username)
