@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-5^-etd!=m0njl_&e-7gdsjd9fokid5f=$drttw&5ebkmz*$0m@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['outlab04-django.herokuapp.com/','127.0.0.1']
+ALLOWED_HOSTS = ['outlab04-django.herokuapp.com','127.0.0.1']
 
 
 # Application definition
