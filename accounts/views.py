@@ -25,10 +25,12 @@ def profile(request,username):
     user_info = requests.get('https://api.github.com/users/{}'.format(username)).json()
     uid.profile.followers = user_info['followers']
     repo_info = requests.get('https://api.github.com/users/{}/repos'.format(username)).json()
-    repo_json = json.loads('{}')
+    # repo_json = json.loads('{}')
+    repo_dict = {}
     for repo in repo_info:
-        repo_json.update({repo['name']:repo['stargazers_count']})
-    uid.profile.repo_info = repo_json
+        repo_dict[repo['name']] = repo['stargazers_count']
+    repo_dict = {k: v for k, v in sorted(repo_dict.items(), key=lambda item: item[1])}
+    uid.profile.repo_info = json.loads(repo_dict)
     uid.save()
     now = timezone.now()
     args = {'username':uid,'time':now}
