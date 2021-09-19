@@ -91,7 +91,7 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'desb24mjgg4ksq',
+        'NAME': os.environ.get('NAME'),
 
         'USER': 'rxpuojgteqttly',
 
