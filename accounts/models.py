@@ -8,6 +8,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     followers = models.IntegerField(blank=True,default=0)
     repo_info = models.JSONField(blank=True,null=True)
+    time_inof = models.CharField(max_length=200,default="")
+    avatar = models.URLField(max_length=200,default="")
 
     def __str__(self):
         return self.user.username
@@ -20,3 +22,8 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class Repository(models.Model):
+    name = models.CharField(max_length=150,default="")
+    stars = models.IntegerField(default=0)
+    user = models.ForeignKey(to=Profile, on_delete=models.CASCADE)

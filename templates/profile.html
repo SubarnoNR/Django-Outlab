@@ -1,14 +1,39 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<!-- <p>{{ user.profile.followers }} </p> -->
-<p>{{ username.first_name }}</p>
-<p>{{ username.profile.followers }} Followers</p>
-<p>Last Updated : {{time}}</p>
-{% if user.username == username.username %}
-    <p><a href="{% url 'profile' username %}">Update Now</a></p>
-{% endif %}
-{% for key, value in username.profile.repo_info.items %}
-    <p>{{key}} - {{value}} Stars</p>
-{% endfor %}
+<div class="container mb-3">
+    <div class="card" style="width: 50rem;">
+        <div class="card-body">
+            <div class="row m-b-r m-t-3">
+                <div class="col-2">
+                    <img src="{{username.profile.avatar}}" width="100%" style="border: 5px solid #555; margin: 3px;">
+                </div>
+                <div class="col-6">
+                    <h4>{{ username.first_name }} {{username.last_name}}</h4>
+                    <h5><small class="text-muted">@{{ username.username }}</small></h5>
+                    <p><strong>{{ username.profile.followers }}</strong> Followers</p>
+                </div>
+                <div class="col-4">
+                    <h5><small>Time modified: {{username.profile.time_inof}}</small></h5>
+                    {% if user.username == username.username %}
+                        <!-- <p><a href="{% url 'update' %}">Update Now</a></p> -->
+                        <a href="{% url 'update' %}" class="btn btn-primary">Update Now</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 1em;">
+        <h4>Repositories:</h4>
+    </div>
+    <div class="row">
+        {% for key, value in repos.items %}
+        <div class="col m-2">
+                <div class="card p-2" style="width: 30em;">
+                    <h5 class="card-title">{{key}} - {{value}} <i class="fa fa-star" style="color: orange;"></i></h5>
+                </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

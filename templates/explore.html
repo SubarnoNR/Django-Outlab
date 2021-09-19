@@ -1,10 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>Userlist</p>
-<ul>
-{% for o_user in all_users %}
-    <li><a href="{% url 'profile' o_user.username %}"> {{o_user.username}} </a></li>
-{% endfor %}
-</ul>
+<div class="container">
+    <div class="row">
+        {% for o_user in all_users %}
+        <div class="col m-2">
+            <div class="card" style="width: 20rem;" id="explore-card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title">{{o_user.first_name}} {{o_user.last_name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@{{o_user.username}}</h6>
+                            <a href="{% url 'profile' o_user.username %}" class="btn btn-primary stretched-link">Profile</a>
+                        </div>
+                        <div class="col"><img src="{{o_user.profile.avatar}}" style="width:100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

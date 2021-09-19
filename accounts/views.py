@@ -7,6 +7,7 @@ from datetime import datetime
 import requests
 import json
 from django.utils import timezone
+from .models import Profile,Repository
 
 
 def register(request):
@@ -14,6 +15,15 @@ def register(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
+            username = form.cleaned_data['username']
+            repo_info = requests.get('https://api.github.com/users/{}/repos'.format(username)).json()
+            for repo in repo_info:
+                Repository.objects.create(name=repo['name'],stars=repo['stargazers_count'],user=User.objects.get(username = username).profile)
+            user_info = requests.get('https://api.github.com/users/{}'.format(username)).json()
+            user = User.objects.get(username=username)
+            user.profile.avatar = user_info['avatar_url']
+            user.profile.time_inof = str(datetime.now().strftime("%m/%d/%Y, %H:%M"))
+            user.save()
             return redirect('/accounts/login')
     else:
         form = SignUpForm()
@@ -24,23 +34,32 @@ def profile(request,username):
     uid = User.objects.get(username = username)
     user_info = requests.get('https://api.github.com/users/{}'.format(username)).json()
     uid.profile.followers = user_info['followers']
-    repo_info = requests.get('https://api.github.com/users/{}/repos'.format(username)).json()
-    repo_json = json.loads('{}')
+    repos = uid.profile.repository_set.all()
     repo_dict = {}
-    for repo in repo_info:
-        repo_dict[repo['name']] = repo['stargazers_count']
+    for repo in repos:
+        repo_dict[repo.name] = repo.stars
     repo_dict = {k: v for k, v in reversed(sorted(repo_dict.items(), key=lambda item: item[1]))}
-    for k,v in repo_dict.items():
-        repo_json.update({k:v})
-    uid.profile.repo_info = repo_json
     uid.save()
-    now = timezone.now()
-    args = {'username':uid,'time':now}
+    args = {'username':uid,'repos':repo_dict}
     return render(request,'profile.html',args)
 
 def explore(request):
-    all_users = User.objects.values()
+    all_users = User.objects.all()
     args = {'all_users':all_users}
     return render(request,'explore.html',args)
+
+def update(request):
+    request.user.profile.repository_set.all().delete()
+    repo_info = requests.get('https://api.github.com/users/{}/repos'.format(request.user.username)).json()
+    for repo in repo_info:
+        Repository.objects.create(name=repo['name'],stars=repo['stargazers_count'],user=request.user.profile)
+    request.user.profile.time_inof = str(datetime.now().strftime("%m/%d/%Y, %H:%M"))
+    repos = request.user.profile.repository_set.all()
+    args = {'username':request.user,'repos':repos}
+    user_info = requests.get('https://api.github.com/users/{}'.format(request.user.username)).json()
+    request.user.profile.avatar = user_info['avatar_url']
+    request.user.save()
+    return redirect('profile',username=request.user.username)
+
     
         

@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-5^-etd!=m0njl_&e-7gdsjd9fokid5f=$drttw&5ebkmz*$0m@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['outlab04-django.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['outlab04-django.herokuapp.com','127.0.0.1','localhost']
 
 
 # Application definition
@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,18 +90,20 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'ddmom1f4iqoeda',
+        'NAME': 'desb24mjgg4ksq',
 
-        'USER': 'cdftbvtsmpjgvu',
+        'USER': 'rxpuojgteqttly',
 
-        'PASSWORD': 'd009d8052fafd6800d3451e303cfc40272a0c5fd2fc14be2e1d7bb99e7b576bb',
+        'PASSWORD': '64298f19fb944dba14018df09c40a912dcbb46e2ec9289a147e668c8cef134fb',
 
-        'HOST': 'ec2-3-219-111-26.compute-1.amazonaws.com',
+        'HOST': 'ec2-44-198-223-154.compute-1.amazonaws.com',
 
         'PORT': '5432',
 
-        # postgres://cdftbvtsmpjgvu:d009d8052fafd6800d3451e303cfc40272a0c5fd2fc14be2e1d7bb99e7b576bb@ec2-3-219-111-26.compute-1.amazonaws.com:5432/ddmom1f4iqoeda
+        # postgres://rxpuojgteqttly:64298f19fb944dba14018df09c40a912dcbb46e2ec9289a147e668c8cef134fb@ec2-44-198-223-154.compute-1.amazonaws.com:5432/desb24mjgg4ksq
 
+        # postgres://cdftbvtsmpjgvu:d009d8052fafd6800d3451e303cfc40272a0c5fd2fc14be2e1d7bb99e7b576bb@ec2-3-219-111-26.compute-1.amazonaws.com:5432/ddmom1f4iqoeda
+        #postgres://mivxdzwdkxfpkg:e70ed0d942c09f15c72d28acc4ebf964b3fe28b628306c1b8d0a62c6b08fe36a@ec2-54-158-247-97.compute-1.amazonaws.com:5432/d3v4e225e2sv1r
     }
 
 }
