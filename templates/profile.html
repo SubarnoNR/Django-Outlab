@@ -6,7 +6,7 @@
         <div class="card-body">
             <div class="row m-b-r m-t-3">
                 <div class="col-2">
-                    <img src="{{username.profile.avatar}}" width="100%" style="border: 5px solid #555; margin: 3px;">
+                    <img src="{{username.profile.avatar}}" class="pfp" width="100%">
                 </div>
                 <div class="col-6">
                     <h4>{{ username.first_name }} {{username.last_name}}</h4>
@@ -30,7 +30,7 @@
         {% for key, value in repos.items %}
         <div class="col m-2">
                 <div class="card p-2" style="width: 30em;">
-                    <h5 class="card-title">{{key}} - {{value}} <i class="fa fa-star" style="color: orange;"></i></h5>
+                    <h5 class="card-title">{{key}} - {{value}} <i class="fa fa-star"></i></h5>
                 </div>
         </div>
         {% endfor %}
