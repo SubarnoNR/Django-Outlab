@@ -1,0 +1,14 @@
+Hundreds of https://stackoverflow.com/ questions
+https://docs.djangoproject.com/en/3.2/
+https://www.youtube.com/watch?v=Fc2O3_2kax8&list=PLw02n0FEB3E3VSHjyYMcFadtQORvl1Ssj
+https://learndjango.com/tutorials/django-login-and-logout-tutorial
+https://learndjango.com/tutorials/django-signup-tutorial
+https://www.valentinog.com/blog/many-to-one/
+https://sjlouji10.medium.com/django-models-with-relationships-many-to-one-relationship-6234d2178203
+https://books.agiliq.com/projects/django-orm-cookbook/en/latest/one_to_many.html
+https://django-crispy-forms.readthedocs.io/en/latest/
+https://getbootstrap.com/docs/5.1/getting-started/introduction/
+https://www.w3schools.com/css/
+https://youtu.be/GMbVzl_aLxM
+https://devcenter.heroku.com/articles/getting-started-with-python?singlepage=true
+https://devcenter.heroku.com/articles/config-vars
