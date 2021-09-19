@@ -8,6 +8,7 @@ import requests
 import json
 from django.utils import timezone
 from .models import Profile,Repository
+from django.contrib.auth.decorators import login_required
 
 
 def register(request):
@@ -30,6 +31,7 @@ def register(request):
     args = {'form':form}
     return render(request,'registration/signup.html',args)
 
+@login_required
 def profile(request,username):
     uid = User.objects.get(username = username)
     user_info = requests.get('https://api.github.com/users/{}'.format(username)).json()
@@ -43,11 +45,13 @@ def profile(request,username):
     args = {'username':uid,'repos':repo_dict}
     return render(request,'profile.html',args)
 
+@login_required
 def explore(request):
     all_users = User.objects.all()
     args = {'all_users':all_users}
     return render(request,'explore.html',args)
 
+@login_required
 def update(request):
     request.user.profile.repository_set.all().delete()
     repo_info = requests.get('https://api.github.com/users/{}/repos'.format(request.user.username)).json()
